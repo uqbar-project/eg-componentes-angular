@@ -7,19 +7,11 @@ export class UsuarioComponent implements OnInit {
   @Input() usuario : Usuario
 
   get usuarioClass() {
-    if (this.usuario.esMujer()) {
-      return ""
-    } else {
-      return "_outline"
-    }
+    return this.usuario.esMujer() ? "" : "_outline"
   }
 
   get usuarioColor() {
-    if (this.usuario.esMujer()) {
-      return "accent"
-    } else {
-      return "primary"
-    }
+    return this.usuario.esMujer() ? "accent" : "primary"
   }
 
   ngOnInit() {}
