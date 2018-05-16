@@ -1,5 +1,7 @@
 # Componentes reutilizables de Angular
 
+![demo](video/demo.gif)
+
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
 ## Development server
