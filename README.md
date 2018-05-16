@@ -98,7 +98,7 @@ Algunas observaciones:
   </mat-card-content>
 ```
 
-`[usuario]=usuario` está marcando que pasaremos al componente el objeto de dominio usuario para cada uno de los elementos de la colección de usuarios, que debemos inicializar en el modelo del componente principal:
+`[usuario]=usuario` está marcando que pasaremos al componente el objeto de dominio usuario para cada uno de los elementos de la colección de usuarios, que debemos inicializar en el modelo del componente principal (app.component.ts):
 
 ```typescript
 export class AppComponent {
@@ -159,3 +159,77 @@ Esto permite que los podamos usar dentro de las vistas.
 
 # Componente contador
 
+El contador es un ejemplo es muy simple, pero muestra la independencia del scope de variables de los componentes de Angular. En la vista principal de la aplicación, definimos dos contadores, cada uno con diferente valor inicial. En el archivo app.component.html escribimos:
+
+```html
+<mat-card>
+  <mat-card-title>
+    Ejemplo de un componente que ingresa un n&uacute;mero entero
+  </mat-card-title>
+  <mat-card-content>
+    <app-contador valorInicial="3"></app-contador>
+    <br>
+    <app-contador valorInicial="0"></app-contador>
+  </mat-card-content>
+</mat-card>
+```
+
+Por lo tanto ya sabemos que nuestro @Input debe ser un valor inicial. Pero además, vamos a trabajar con un objeto de dominio contador, al que vamos a poder sumar o restarle un número (contador.domain.ts):
+
+```typescript
+export class Contador {
+    valor = 0
+
+    constructor(valorInicial : number) {
+        this.valor = valorInicial
+    }
+
+    sumar() {
+        this.valor++
+    }
+
+    restar() {
+        this.valor--
+    }
+}
+```
+
+El componente principal va a inicializar el contador cuando reciba el valor inicial. Y esto lo hace en el momento de la inicialización, dentro del método ngOnInit (contador.component.ts):
+
+```typescript
+export class ContadorComponent implements OnInit {
+
+  @Input() valorInicial : number
+  contador : Contador
+  
+  constructor() { }
+
+  ngOnInit() {
+    this.contador = new Contador(this.valorInicial)
+  }
+}
+```
+
+Así se construye el contador que va a ser el modelo de la vista. Aquí tendremos:
+
+- _buttons_ que disparan actualizaciones al modelo (ver la propiedad _click_)...
+- ...y un binding del modelo a la vista del input que muestra el valor actual del contador (deshabilitado para el usuario, ver la propiedad _value_ que utiliza el _moustache_ contador.valor)
+
+Esto lo vemos en la vista contador.component.html:
+
+```html
+<mat-card>
+    <button mat-mini-fab color="primary" (click)="contador.restar()">
+        <i class="material-icons">keyboard_arrow_left</i>
+    </button>
+    <mat-form-field class="example-full-width">
+        <input matInput disabled value="{{contador.valor}}">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="contador.sumar()">
+        <i class="material-icons">keyboard_arrow_right</i>
+    </button>
+</mat-card>
+```
+
+
+# Testing TODO
