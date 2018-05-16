@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Usuario } from './usuario/usuario'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'app'
+  usuarios = [
+        new Usuario("Gabriel Graves", "Soy el Brad Pitt de Lugano", Usuario.MASCULINO),
+        new Usuario("Javier Zolotarchuk", "Tengo el corazón mirando al Sur...", Usuario.MASCULINO),
+        new Usuario("Clara Allende", "Git Git Scala Git", Usuario.FEMENINO)
+    ]
 }

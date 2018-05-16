@@ -1,27 +1,42 @@
-# EgComponentesAngular
+# Componentes reutilizables de Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Creación de componentes con Angular CLI
 
-## Build
+Los componentes se generan con la interfaz de línea de comandos de Angular
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+fernando@dodain ~/workspace/angular-2018/eg-componentes-angular $ ng generate component contador
+CREATE src/app/contador/contador.component.css (0 bytes)
+CREATE src/app/contador/contador.component.html (27 bytes)
+CREATE src/app/contador/contador.component.spec.ts (642 bytes)
+CREATE src/app/contador/contador.component.ts (277 bytes)
+UPDATE src/app/app.module.ts (404 bytes)
+fernando@dodain ~/workspace/angular-2018/eg-componentes-angular $ ng generate component usuario
+CREATE src/app/usuario/usuario.component.css (0 bytes)
+CREATE src/app/usuario/usuario.component.html (26 bytes)
+CREATE src/app/usuario/usuario.component.spec.ts (635 bytes)
+CREATE src/app/usuario/usuario.component.ts (273 bytes)
+UPDATE src/app/app.module.ts (490 bytes)
+```
 
-## Running unit tests
+Como vemos, todo componente tiene una estructura similar a una aplicación Angular, solo que sin el módulo. Quedan entonces estos archivos:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Agregando Material Design para Angular
 
-## Running end-to-end tests
+https://material.angular.io/
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```bash
+$ npm install --save @angular/material @angular/cdk
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+Seguir las instrucciones de https://material.angular.io/guide/getting-started, en particular agregar a styles.css
+
