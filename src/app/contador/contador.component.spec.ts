@@ -1,25 +1,66 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ContadorComponent } from './contador.component';
+import { ContadorComponent } from './contador.component'
+
+/** Imports de Material */
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatCardTitle} from '@angular/material';
 
 describe('ContadorComponent', () => {
-  let component: ContadorComponent;
-  let fixture: ComponentFixture<ContadorComponent>;
+  let component: ContadorComponent
+  let fixture: ComponentFixture<ContadorComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContadorComponent ]
+      declarations: [ ContadorComponent ],
+      imports: [
+        MatButtonModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        MatCardModule,
+        BrowserAnimationsModule
+      ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContadorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ContadorComponent)
+    component = fixture.debugElement.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+  it('initial value should be 5 if setted', () => {
+    component.valorInicial = 5
+    component.ngOnInit()
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      const result = fixture.debugElement.nativeElement
+      expect(result.querySelector("#contador").value).toEqual("5")
+      })
+  })
+  it('initial value should increase if plus button clicked', () => {
+    component.valorInicial = 5
+    component.ngOnInit()
+    const result = fixture.debugElement.nativeElement
+    result.querySelector("#sumar").click()
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      expect(result.querySelector("#contador").value).toEqual("6")
+      })
+  })
+  it('initial value should decrease if minus button clicked', () => {
+    component.valorInicial = 5
+    component.ngOnInit()
+    const result = fixture.debugElement.nativeElement
+    result.querySelector("#restar").click()
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      expect(result.querySelector("#contador").value).toEqual("4")
+      })
+  })
+
+})

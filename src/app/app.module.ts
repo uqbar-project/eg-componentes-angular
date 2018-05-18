@@ -26,4 +26,5 @@ import {MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule} from
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
