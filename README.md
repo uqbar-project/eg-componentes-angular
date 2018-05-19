@@ -1,5 +1,7 @@
 # Componentes reutilizables de Angular
 
+[![Build Status](https://travis-ci.org/uqbar-project/eg-componentes-angular.svg?branch=master)](https://travis-ci.org/uqbar-project/eg-componentes-angular)
+
 ![demo](video/demo.gif)
 
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
@@ -230,6 +232,11 @@ Esto lo vemos en la vista contador.component.html:
     </button>
 </mat-card>
 ```
+
+Lo interesante es que pueden coexistir dos componentes app-contador, cada una con su propio valor en el modelo.
+
+Vemos el gráfico general de la solución en Angular:
+
 
 
 # Testing TODO

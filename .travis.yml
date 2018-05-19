@@ -19,4 +19,4 @@ before_install:
 
 before_script:
 
-script: ng test --sourceMap=false
+script: ng test --sourceMap=false --singleRun
