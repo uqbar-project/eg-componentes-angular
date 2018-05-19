@@ -4,16 +4,16 @@ export class Usuario {
 
     nombre : string
     fraseCabecera : string
-    sexo : string
+    genero : string
 
-    constructor(nombre, fraseCabecera, sexo) {
+    constructor(nombre, fraseCabecera, genero) {
         this.nombre = nombre
         this.fraseCabecera = fraseCabecera
-        this.sexo = sexo
+        this.genero = genero
     }
 
     esMujer() {
-        return this.sexo === Usuario.FEMENINO
+        return this.genero === Usuario.FEMENINO
     }
 
 }
