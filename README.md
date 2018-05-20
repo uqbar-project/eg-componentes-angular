@@ -237,6 +237,8 @@ Lo interesante es que pueden coexistir dos componentes app-contador, cada una co
 
 Vemos el gráfico general de la solución en Angular:
 
+![images](ArquitecturaContador.png)
 
+# Componente principal TODO
 
 # Testing TODO
