@@ -278,4 +278,56 @@ Como hemos visto anteriormente el componente principal pasa
 
 ![images](images/ArquitecturaComponentesReutilizables.png)
 
-# Testing TODO
+# Testing
+
+## Usuario
+
+Hay un solo test relevante para contar respecto al usuario: el componente debe mostrar un ícono de color rosa en el caso del género femenino:
+
+```typescript
+  it('a woman should appear with a rose icon', () => {
+    fixture.detectChanges()
+    const result = fixture.debugElement.nativeElement
+    expect(result.querySelector(".mat-accent")).toBeTruthy()
+  })
+```
+
+El método toBeTruthy() busca que exista un elemento html con una clase _mat-accent_ que equivale al color rosa de Material Angular. Claramente, los tests son más que unitarios, y están atados a los componentes visuales que estemos utilizando.
+
+## Contador
+
+Además de los típicos controles de creación de componente, en los tests validamos
+
+- que se pueda pasar un valor inicial como input: se debe visualizar en el input
+- pasar un valor e incrementar uno el contador: se debe visualizar el nuevo valor en el input
+- pasar un valor y decrementar uno el contador: se debe visualizar el nuevo valor en el input
+
+Esto naturalmente está en el archivo _usuario.component.spec.ts_:
+
+```typescript
+  it('initial value should be 5 if setted', () => {
+    component.valorInicial = 5
+    component.ngOnInit()
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      const result = fixture.debugElement.nativeElement
+      expect(result.querySelector("#contador").value).toEqual("5")
+      })
+  })
+  it('initial value should increase if plus button clicked', () => {
+    component.valorInicial = 5
+    component.ngOnInit()
+    const result = fixture.debugElement.nativeElement
+    result.querySelector("#sumar").click()
+    fixture.detectChanges()
+    fixture.whenStable().then(() => {
+      expect(result.querySelector("#contador").value).toEqual("6")
+      })
+  })
+```
+
+Para poder construir el objeto Contador y pasarle el valor inicial, debemos invocar manualmente al evento ngOnInit() del componente. Por otra parte, el método whenStable() del fixture nos devuelve una _promise_, que cuando terminen de ejecutarse los eventos de inicialización ejecutará el bloque que le pasemos como parámetro (en este caso, verificar que el contador tiene el nuevo valor).
+
+## Componente padre
+
+Por último, el componente padre también tiene su propio conjunto de tests, aunque al delegar principalmente a los componentes hijos, no son pruebas interesantes para contar (simplemente que se pueda crear correctamente el componente).
