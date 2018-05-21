@@ -113,6 +113,36 @@ export class AppComponent {
 }
 ```
 
+## Objeto de dominio Usuario
+
+El objeto Usuario es más bien simple, agrupa propiedades, define constantes de género y un método para saber si es mujer:
+
+```typescript
+export class Usuario {
+    static readonly FEMENINO = "F"
+    static readonly MASCULINO = "M"
+
+    nombre : string
+    fraseCabecera : string
+    genero : string
+
+    constructor(nombre, fraseCabecera, genero) {
+        this.nombre = nombre
+        this.fraseCabecera = fraseCabecera
+        this.genero = genero
+    }
+
+    esMujer() {
+        return this.genero === Usuario.FEMENINO
+    }
+
+}
+```
+
+Vemos un resumen de la arquitectura:
+
+![images](images/ArquitecturaUsuario.png)
+
 ## Agregados de Material
 
 Para incorporar elementos de Material debemos:
@@ -239,6 +269,13 @@ Vemos el gráfico general de la solución en Angular:
 
 ![images](images/ArquitecturaContador.png)
 
-# Componente principal TODO
+# Componente principal
+
+Como hemos visto anteriormente el componente principal pasa
+
+- cada parámetro de la lista de usuarios como input del componente de usuarios
+- un valor inicial como input al componente contador
+
+![images](images/ArquitecturaComponentesReutilizables.png)
 
 # Testing TODO
