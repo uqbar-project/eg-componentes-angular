@@ -3,8 +3,8 @@
     Ejemplo de un componente que muestra un usuario
   </mat-card-title>
   <mat-card-content>
-    <div *ngFor='let usuario of usuarios'>
-      <app-usuario [usuario]="usuario"></app-usuario>
+    <div *ngFor='let elemento of usuarios'>
+      <app-usuario [usuario]="elemento"></app-usuario>
     </div>
   </mat-card-content>
 </mat-card>

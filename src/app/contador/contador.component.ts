@@ -11,8 +11,6 @@ export class ContadorComponent implements OnInit {
   @Input() valorInicial : number
   contador : Contador
   
-  constructor() { }
-
   ngOnInit() {
     this.contador = new Contador(this.valorInicial)
   }

@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core'
-import { Usuario } from './usuario.domain'
+import { Component, Input } from '@angular/core';
+import { Usuario } from './usuario.domain';
 
 @Component({selector: 'app-usuario', templateUrl: './usuario.component.html', styleUrls: ['./usuario.component.css']})
-export class UsuarioComponent implements OnInit {
+export class UsuarioComponent {
 
   @Input() usuario : Usuario
 
@@ -13,7 +13,5 @@ export class UsuarioComponent implements OnInit {
   get usuarioColor() {
     return this.usuario.esMujer() ? "accent" : "primary"
   }
-
-  ngOnInit() {}
 
 }
