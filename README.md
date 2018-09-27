@@ -298,16 +298,21 @@ El método toBeTruthy() busca que exista un elemento html con una clase _mat-acc
 
 Además de los típicos controles de creación de componente, en los tests validamos
 
-- que se pueda pasar un valor inicial como input: se debe visualizar en el input
+- que se pueda pasar un valor inicial como parámetro @input: se debe visualizar en el input de texto
 - pasar un valor e incrementar uno el contador: se debe visualizar el nuevo valor en el input
 - pasar un valor y decrementar uno el contador: se debe visualizar el nuevo valor en el input
 
 Esto naturalmente está en el archivo _usuario.component.spec.ts_:
 
 ```typescript
-  it('initial value should be 5 if setted', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ContadorComponent)
+    component = fixture.debugElement.componentInstance
+    fixture.detectChanges()
     component.valorInicial = 5
     component.ngOnInit()
+  })
+  it('initial value should be 5 if setted', () => {
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       const result = fixture.debugElement.nativeElement
@@ -315,8 +320,6 @@ Esto naturalmente está en el archivo _usuario.component.spec.ts_:
       })
   })
   it('initial value should increase if plus button clicked', () => {
-    component.valorInicial = 5
-    component.ngOnInit()
     const result = fixture.debugElement.nativeElement
     result.querySelector("#sumar").click()
     fixture.detectChanges()

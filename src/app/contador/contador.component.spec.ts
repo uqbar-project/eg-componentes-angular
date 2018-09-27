@@ -28,14 +28,14 @@ describe('ContadorComponent', () => {
     fixture = TestBed.createComponent(ContadorComponent)
     component = fixture.debugElement.componentInstance
     fixture.detectChanges()
+    component.valorInicial = 5
+    component.ngOnInit()
   })
 
   it('should create', () => {
     expect(component).toBeTruthy()
   })
   it('initial value should be 5 if setted', () => {
-    component.valorInicial = 5
-    component.ngOnInit()
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       const result = fixture.debugElement.nativeElement
@@ -43,8 +43,6 @@ describe('ContadorComponent', () => {
       })
   })
   it('initial value should increase if plus button clicked', () => {
-    component.valorInicial = 5
-    component.ngOnInit()
     const result = fixture.debugElement.nativeElement
     result.querySelector("#sumar").click()
     fixture.detectChanges()
@@ -53,8 +51,6 @@ describe('ContadorComponent', () => {
       })
   })
   it('initial value should decrease if minus button clicked', () => {
-    component.valorInicial = 5
-    component.ngOnInit()
     const result = fixture.debugElement.nativeElement
     result.querySelector("#restar").click()
     fixture.detectChanges()
