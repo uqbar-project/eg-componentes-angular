@@ -4,7 +4,7 @@
 
 ![demo](video/demo.gif)
 
-Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 8.
 
 
 ## Creación de componentes con Angular CLI
@@ -37,7 +37,7 @@ Como vemos, todo componente tiene una estructura similar a una aplicación Angul
 ## Agregando Material Design para Angular
 
 ```bash
-$ npm install --save @angular/material @angular/cdk
+$ npm install @angular/material @angular/cdk
 ```
 
 En https://material.angular.io/ podrán encontrar tips para incoporar componentes de Angular para trabajar, en particular en la página [getting started](https://material.angular.io/guide/getting-started). 
