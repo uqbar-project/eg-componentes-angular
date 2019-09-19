@@ -226,6 +226,36 @@ export class Contador {
 }
 ```
 
+Una variante más sencilla es hacer:
+
+```ts
+export class Contador {
+    constructor(public valor = 0) { }
+
+    sumar() {
+        this.valor++
+    }
+
+    restar() {
+        this.valor--
+    }
+}
+```
+
+Los parámetros en el constructor marcados con el modificador `public` o `private` generan un atributo en la misma clase:
+
+- primero definimos un atributo valor de tipo number, con valor por defecto 0
+- por otra parte al construir un Contador, asignamos el valor recibido en el constructor en dicho atributo
+
+Entonces:
+
+```ts
+new Contador()   ==> el atributo valor se inicializa en 0
+new Contador(5)  ==> el atributo contador se inicializa en 5
+```
+
+Para más información pueden ver [este artículo](https://kendaleiv.com/typescript-constructor-assignment-public-and-private-keywords/).
+
 El componente principal va a inicializar el contador cuando reciba el valor inicial. Y esto lo hace en el momento de la inicialización, dentro del método ngOnInit (contador.component.ts):
 
 ```typescript

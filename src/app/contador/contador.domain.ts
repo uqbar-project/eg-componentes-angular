@@ -1,9 +1,5 @@
 export class Contador {
-    valor = 0
-
-    constructor(valorInicial : number) {
-        this.valor = valorInicial
-    }
+    constructor(public valor = 0) { }
 
     sumar() {
         this.valor++
@@ -12,5 +8,4 @@ export class Contador {
     restar() {
         this.valor--
     }
-
 }
