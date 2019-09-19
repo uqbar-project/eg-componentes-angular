@@ -251,12 +251,14 @@ Entonces:
 
 ```ts
 new Contador()   ==> el atributo valor se inicializa en 0
-new Contador(5)  ==> el atributo contador se inicializa en 5
+new Contador(5)  ==> el atributo valor se inicializa en 5
 ```
 
 Para más información pueden ver [este artículo](https://kendaleiv.com/typescript-constructor-assignment-public-and-private-keywords/).
 
-El componente principal va a inicializar el contador cuando reciba el valor inicial. Y esto lo hace en el momento de la inicialización, dentro del método ngOnInit (contador.component.ts):
+## Componente Contador
+
+El componente de Angular Contador va a inicializar el contador cuando reciba el valor inicial. Y esto lo hace en el momento de la inicialización, dentro del método ngOnInit (contador.component.ts):
 
 ```typescript
 export class ContadorComponent implements OnInit {
@@ -355,7 +357,7 @@ Esto naturalmente está en el archivo _usuario.component.spec.ts_:
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       expect(result.querySelector("#contador").value).toEqual("6")
-      })
+    })
   })
 ```
 
@@ -363,4 +365,4 @@ Para poder construir el objeto Contador y pasarle el valor inicial, debemos invo
 
 ## Componente padre
 
-Por último, el componente padre también tiene su propio conjunto de tests, aunque al delegar principalmente a los componentes hijos, no son pruebas interesantes para contar (simplemente que se pueda crear correctamente el componente).
+Por último, el componente padre también tiene su propio conjunto de tests, aunque al delegar principalmente a los componentes hijos, no son pruebas interesantes para contar (simplemente que se pueda crear correctamente).
