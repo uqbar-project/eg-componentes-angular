@@ -44,6 +44,7 @@ describe('ContadorComponent', () => {
   })
   it('initial value should increase if plus button clicked', () => {
     const result = fixture.debugElement.nativeElement
+    result.querySelector('#sumar').click()
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       expect(result.querySelector('#contador').value).toEqual('6')
