@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { Contador } from './contador.domain'
 
 @Component({
@@ -8,9 +8,9 @@ import { Contador } from './contador.domain'
 })
 export class ContadorComponent implements OnInit {
 
-  @Input() valorInicial : number
-  contador : Contador
-  
+  @Input() valorInicial: number
+  contador: Contador
+
   ngOnInit() {
     this.contador = new Contador(this.valorInicial)
   }

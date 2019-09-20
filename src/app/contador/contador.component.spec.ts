@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { ContadorComponent } from './contador.component'
 
 /** Imports de Material */
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatCardTitle} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatCardTitle } from '@angular/material';
 
 describe('ContadorComponent', () => {
   let component: ContadorComponent
@@ -12,16 +12,16 @@ describe('ContadorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContadorComponent ],
+      declarations: [ContadorComponent],
       imports: [
-        MatButtonModule, 
-        MatFormFieldModule, 
-        MatInputModule, 
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
         MatCardModule,
         BrowserAnimationsModule
       ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {
@@ -39,24 +39,23 @@ describe('ContadorComponent', () => {
     fixture.detectChanges()
     fixture.whenStable().then(() => {
       const result = fixture.debugElement.nativeElement
-      expect(result.querySelector("#contador").value).toEqual("5")
-      })
+      expect(result.querySelector('#contador').value).toEqual('5')
+    })
   })
   it('initial value should increase if plus button clicked', () => {
     const result = fixture.debugElement.nativeElement
-    result.querySelector("#sumar").click()
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      expect(result.querySelector("#contador").value).toEqual("6")
-      })
+      expect(result.querySelector('#contador').value).toEqual('6')
+    })
   })
   it('initial value should decrease if minus button clicked', () => {
     const result = fixture.debugElement.nativeElement
-    result.querySelector("#restar").click()
+    result.querySelector('#restar').click()
     fixture.detectChanges()
     fixture.whenStable().then(() => {
-      expect(result.querySelector("#contador").value).toEqual("4")
-      })
+      expect(result.querySelector('#contador').value).toEqual('4')
+    })
   })
 
 })
