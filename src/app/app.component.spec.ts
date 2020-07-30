@@ -1,14 +1,16 @@
-import {TestBed, async} from '@angular/core/testing'
-import {AppComponent} from './app.component'
-import {UsuarioComponent} from './usuario/usuario.component'
-import {ContadorComponent} from './contador/contador.component'
+import { async, TestBed } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+import { AppComponent } from './app.component'
+import { ContadorComponent } from './contador/contador.component'
+import { UsuarioComponent } from './usuario/usuario.component'
 
 /** Imports de Material */
-import {FormsModule} from '@angular/forms' // necesario agregarlo aqui
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule} from '@angular/material'
-import {Browser} from 'protractor'
-
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({

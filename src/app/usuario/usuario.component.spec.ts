@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { UsuarioComponent } from './usuario.component'
-
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material'
-import { Usuario, FEMENINO } from './usuario.domain'
+
+import { UsuarioComponent } from './usuario.component'
+import { GENERO, Usuario } from './usuario.domain'
 
 describe('UsuarioComponent', () => {
   let component: UsuarioComponent
@@ -26,7 +29,7 @@ describe('UsuarioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UsuarioComponent)
     component = fixture.componentInstance
-    component.usuario = new Usuario('Guadalupe Gerschwin', 'La vida es muy corta para poner una frase ingeniosa', FEMENINO)
+    component.usuario = new Usuario('Guadalupe Gerschwin', 'La vida es muy corta para poner una frase ingeniosa', GENERO.FEMENINO)
     fixture.detectChanges()
   })
 
