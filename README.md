@@ -4,7 +4,7 @@
 
 ![demo](video/demo.gif)
 
-Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 8.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli).
 
 
 ## Creación de componentes con Angular CLI

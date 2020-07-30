@@ -1,5 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { Usuario } from './usuario.domain';
+import { Component, Input } from '@angular/core'
+
+import { GENERO, Usuario } from './usuario.domain'
+
+const mapaColores = {
+  [GENERO.FEMENINO]: 'accent',
+  [GENERO.MASCULINO]: 'primary',
+  [GENERO.NO_BINARIE]: 'neutral',
+}
+
+const mapaIconos = {
+  [GENERO.FEMENINO]: '',
+  [GENERO.MASCULINO]: '_outline',
+  [GENERO.NO_BINARIE]: '',
+}
 
 @Component({ selector: 'app-usuario', templateUrl: './usuario.component.html', styleUrls: ['./usuario.component.css'] })
 export class UsuarioComponent {
@@ -7,11 +20,11 @@ export class UsuarioComponent {
   @Input() usuario: Usuario
 
   get usuarioClass() {
-    return this.usuario.esMujer() ? '' : '_outline'
+    return mapaIconos[this.usuario.genero]
   }
 
   get usuarioColor() {
-    return this.usuario.esMujer() ? 'accent' : 'primary'
+    return mapaColores[this.usuario.genero]
   }
 
 }
