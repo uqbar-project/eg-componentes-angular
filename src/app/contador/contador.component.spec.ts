@@ -4,13 +4,14 @@ import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { getByTestId } from 'src/test-utils'
 
 import { ContadorComponent } from './contador.component'
 
 /** Imports de Material */
 describe('ContadorComponent', () => {
   let component: ContadorComponent
-  let fixture: ComponentFixture<ContadorComponent>
+  let contadorComponent: ComponentFixture<ContadorComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,9 +28,9 @@ describe('ContadorComponent', () => {
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContadorComponent)
-    component = fixture.debugElement.componentInstance
-    fixture.detectChanges()
+    contadorComponent = TestBed.createComponent(ContadorComponent)
+    component = contadorComponent.debugElement.componentInstance
+    contadorComponent.detectChanges()
     component.valorInicial = 5
     component.ngOnInit()
   })
@@ -38,26 +39,23 @@ describe('ContadorComponent', () => {
     expect(component).toBeTruthy()
   })
   it('initial value should be 5 if setted', () => {
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      const result = fixture.debugElement.nativeElement
-      expect(result.querySelector('#contador').value).toEqual('5')
+    contadorComponent.detectChanges()
+    contadorComponent.whenStable().then(() => {
+      expect(getByTestId(contadorComponent, 'contador').value).toEqual('5')
     })
   })
   it('initial value should increase if plus button clicked', () => {
-    const result = fixture.debugElement.nativeElement
-    result.querySelector('#sumar').click()
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(result.querySelector('#contador').value).toEqual('6')
+    getByTestId(contadorComponent, 'sumar').click()
+    contadorComponent.detectChanges()
+    contadorComponent.whenStable().then(() => {
+      expect(getByTestId(contadorComponent, 'contador').value).toEqual('6')
     })
   })
   it('initial value should decrease if minus button clicked', () => {
-    const result = fixture.debugElement.nativeElement
-    result.querySelector('#restar').click()
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(result.querySelector('#contador').value).toEqual('4')
+    getByTestId(contadorComponent, 'restar').click()
+    contadorComponent.detectChanges()
+    contadorComponent.whenStable().then(() => {
+      expect(getByTestId(contadorComponent, 'contador').value).toEqual('4')
     })
   })
 

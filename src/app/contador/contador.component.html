@@ -1,18 +1,18 @@
 <mat-card>
 
-    <button mat-mini-fab color="primary" id="restar" (click)="contador.restar()">
+    <button mat-mini-fab color="primary" data-testid="restar" (click)="contador.restar()">
         <i class="material-icons">keyboard_arrow_left</i>
     </button>
 
     &nbsp;
 
     <mat-form-field class="example-full-width">
-        <input matInput disabled id="contador" value="{{contador.valor}}">
+        <input matInput disabled data-testid="contador" value="{{contador.valor}}">
     </mat-form-field>
 
     &nbsp;
 
-    <button mat-mini-fab color="primary" id="sumar" (click)="contador.sumar()">
+    <button mat-mini-fab color="primary" data-testid="sumar" (click)="contador.sumar()">
         <i class="material-icons">keyboard_arrow_right</i>
     </button>
 

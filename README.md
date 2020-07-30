@@ -78,19 +78,19 @@ export class UsuarioComponent implements OnInit {
   @Input() usuario : Usuario
 
   get usuarioClass() {
-    return this.usuario.esMujer() ? "" : "_outline"
+    return mapaIconos[this.usuario.genero]
   }
 
   get usuarioColor() {
-    return this.usuario.esMujer() ? "accent" : "primary"
+    return mapaColores[this.usuario.genero]
   }
 ```
 
 Algunas observaciones:
 
-- tanto usuarioClass como usuarioColor lo definimos como properties de solo lectura mediante el prefijo get (esto hace que no lo invoquemos con paréntesis sino como si fueran atributos del objeto)
+- tanto usuarioClass como usuarioColor lo definimos como properties de solo lectura mediante el prefijo get (esto hace que no lo invoquemos con paréntesis sino como si fueran atributos del objeto). En ambos métodos hacemos lo mismo: tenemos un mapa cuya clave es el género del usuari@ y cuyo valor es lo que queremos que devuelva.
 
-- el usuario no vamos a instanciarlo desde cero, sino que lo vamos a pasar como **input**, por eso aparece la annotation @Input. Esto permite que lo llamemos desde la vista principal, dentro de un for que arma una lista de usuarios:
+- el usuario no vamos a instanciarlo desde cero, sino que lo vamos a pasar como **input**, por eso aparece la annotation `@Input`. Esto permite que lo llamemos desde la vista principal, dentro de un for que arma una lista de usuarios:
 
 ```html
   <mat-card-content>
@@ -115,26 +115,16 @@ export class AppComponent {
 
 ## Objeto de dominio Usuario
 
-El objeto Usuario es más bien simple, agrupa propiedades, define constantes de género y un método para saber si es mujer:
+El objeto Usuario es más bien simple, agrupa y publica las propiedades. Como dato interesante podemos ver cómo se define un Enum en Typescript:
 
 ```typescript
+export enum GENERO {
+    FEMENINO = 'F', MASCULINO = 'M', NO_BINARIE = 'X'
+}
+
 export class Usuario {
-    static readonly FEMENINO = "F"
-    static readonly MASCULINO = "M"
 
-    nombre : string
-    fraseCabecera : string
-    genero : string
-
-    constructor(nombre, fraseCabecera, genero) {
-        this.nombre = nombre
-        this.fraseCabecera = fraseCabecera
-        this.genero = genero
-    }
-
-    esMujer() {
-        return this.genero === Usuario.FEMENINO
-    }
+    constructor(public nombre = '', public fraseCabecera = '', public genero = GENERO.NO_BINARIE) { }
 
 }
 ```
@@ -157,12 +147,15 @@ Para incorporar elementos de Material debemos:
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 ```
 
-- en el archivo app.module.ts agregar los imports en la definición del módulo
+- en el archivo app.module.ts agregar los imports en la definición del módulo. A partir de las últimas versiones de Material debemos hacer los imports en archivos separados:
 
 ```typescript
 /** Imports de Material */
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCardModule } from '@angular/material/card'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -283,13 +276,13 @@ Esto lo vemos en la vista contador.component.html:
 
 ```html
 <mat-card>
-    <button mat-mini-fab color="primary" (click)="contador.restar()">
+    <button mat-mini-fab color="primary" data-testid="restar" (click)="contador.restar()">
         <i class="material-icons">keyboard_arrow_left</i>
     </button>
     <mat-form-field class="example-full-width">
-        <input matInput disabled value="{{contador.valor}}">
+        <input matInput disabled data-testid="contador" value="{{contador.valor}}">
     </mat-form-field>
-    <button mat-mini-fab color="primary" (click)="contador.sumar()">
+    <button mat-mini-fab color="primary" data-testid="sumar" (click)="contador.sumar()">
         <i class="material-icons">keyboard_arrow_right</i>
     </button>
 </mat-card>
@@ -338,30 +331,30 @@ Esto naturalmente está en el archivo _usuario.component.spec.ts_:
 
 ```typescript
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContadorComponent)
-    component = fixture.debugElement.componentInstance
-    fixture.detectChanges()
+    contadorComponent = TestBed.createComponent(ContadorComponent)
+    component = contadorComponent.debugElement.componentInstance
+    contadorComponent.detectChanges()
     component.valorInicial = 5
     component.ngOnInit()
   })
   it('initial value should be 5 if setted', () => {
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      const result = fixture.debugElement.nativeElement
-      expect(result.querySelector("#contador").value).toEqual("5")
-      })
+    contadorComponent.detectChanges()
+    contadorComponent.whenStable().then(() => {
+      expect(getByTestId(contadorComponent, 'contador').value).toEqual('5')
+    })
   })
   it('initial value should increase if plus button clicked', () => {
-    const result = fixture.debugElement.nativeElement
-    result.querySelector("#sumar").click()
-    fixture.detectChanges()
-    fixture.whenStable().then(() => {
-      expect(result.querySelector("#contador").value).toEqual("6")
+    getByTestId(contadorComponent, 'sumar').click()
+    contadorComponent.detectChanges()
+    contadorComponent.whenStable().then(() => {
+      expect(getByTestId(contadorComponent, 'contador').value).toEqual('6')
     })
   })
 ```
 
 Para poder construir el objeto Contador y pasarle el valor inicial, debemos invocar manualmente al evento ngOnInit() del componente. Por otra parte, el método whenStable() del fixture nos devuelve una _promise_, que cuando terminen de ejecutarse los eventos de inicialización ejecutará el bloque que le pasemos como parámetro (en este caso, verificar que el contador tiene el nuevo valor).
+
+Si se fijaron bien, estamos utilizando la técnica de tener tags de HTML con atributos `data-testid`, para luego poder identificarlos puntualmente en los tests. Los navegadores ignoran esta directiva, lo que permite que nuestros tests sean resilientes a los cambios. La función `getByTestId` está definida en un archivo `test-utils`.
 
 ## Componente padre
 
