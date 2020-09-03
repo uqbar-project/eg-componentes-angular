@@ -94,13 +94,13 @@ Algunas observaciones:
 
 ```html
   <mat-card-content>
-    <div *ngFor='let usuario of usuarios'>
-      <app-usuario [usuario]="usuario"></app-usuario>
+    <div *ngFor='let elemento of usuarios'>
+      <app-usuario [usuario]="elemento"></app-usuario>
     </div>
   </mat-card-content>
 ```
 
-`[usuario]=usuario` está marcando que pasaremos al componente el objeto de dominio usuario para cada uno de los elementos de la colección de usuarios, que debemos inicializar en el modelo del componente principal (app.component.ts):
+`[usuario]=elemento` está marcando que pasaremos al componente el objeto de dominio usuario para cada uno de los elementos de la colección de usuarios, que debemos inicializar en el modelo del componente principal (app.component.ts):
 
 ```typescript
 export class AppComponent {
@@ -310,7 +310,7 @@ Como hemos visto anteriormente el componente principal pasa
 Hay un solo test relevante para contar respecto al usuario: el componente debe mostrar un ícono de color rosa en el caso del género femenino:
 
 ```typescript
-  it('a woman should appear with a rose icon', () => {
+  it('female gender should appear with a rose icon', () => {
     fixture.detectChanges()
     const result = fixture.debugElement.nativeElement
     expect(result.querySelector(".mat-accent")).toBeTruthy()

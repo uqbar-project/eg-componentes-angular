@@ -37,7 +37,7 @@ describe('UsuarioComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('a woman should appear with a rose icon', () => {
+  it('female gender should appear with a rose icon', () => {
     const result = fixture.debugElement.nativeElement
     expect(esMujer(result)).toBeTruthy()
   })
