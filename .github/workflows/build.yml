@@ -19,14 +19,14 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.npm
-          key: $-node-$
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            $-node-
+            ${{ runner.os }}-node-
 
-      - name: Node $
+      - name: Node ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: $
+          node-version: ${{ matrix.node-version }}
 
       - name: Run tests & linter
         run: |
@@ -38,4 +38,4 @@ jobs:
         with:
           coverage-summary-path: coverage/eg-componentes-angular/coverage-summary.json
           protected-branches: '["master"]'
-          github_token: $
+          github_token: ${{ secrets.GITHUB_TOKEN }}

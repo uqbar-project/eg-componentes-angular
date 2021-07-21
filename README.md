@@ -1,6 +1,6 @@
 # Componentes reutilizables de Angular
 
-[![Build Status](https://travis-ci.org/uqbar-project/eg-componentes-angular.svg?branch=master)](https://travis-ci.org/uqbar-project/eg-componentes-angular)
+[![Build](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml)
 
 ![demo](video/demo.gif)
 
