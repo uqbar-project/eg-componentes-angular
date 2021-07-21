@@ -1,0 +1,41 @@
+name: Build
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: $-node-$
+          restore-keys: |
+            $-node-
+
+      - name: Node $
+        uses: actions/setup-node@v1
+        with:
+          node-version: $
+
+      - name: Run tests & linter
+        run: |
+          npm ci
+          npm run test:prod
+          npm run lint
+      - name: Coverage badge
+        uses: demyanets/angular-coverage-badges-action@v1
+        with:
+          coverage-summary-path: coverage/eg-componentes-angular/coverage-summary.json
+          protected-branches: '["master"]'
+          github_token: $

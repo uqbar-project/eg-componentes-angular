@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
 import { ContadorComponent } from './contador/contador.component'
@@ -23,7 +24,8 @@ import { UsuarioComponent } from './usuario/usuario.component'
       MatButtonModule,
       MatFormFieldModule,
       MatInputModule,
-      MatCardModule
+      MatCardModule,
+      FormsModule,
    ],
    providers: [],
    bootstrap: [

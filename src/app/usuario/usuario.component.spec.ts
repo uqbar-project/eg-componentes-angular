@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -12,7 +12,7 @@ describe('UsuarioComponent', () => {
   let component: UsuarioComponent
   let fixture: ComponentFixture<UsuarioComponent>
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [UsuarioComponent],
       imports: [
@@ -43,6 +43,7 @@ describe('UsuarioComponent', () => {
   })
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function esMujer(result: any) {
   return result.querySelector('.mat-accent')
 }

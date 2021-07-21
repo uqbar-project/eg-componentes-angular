@@ -8,8 +8,10 @@ import { Contador } from './contador.domain'
 })
 export class ContadorComponent implements OnInit {
 
-  @Input() valorInicial: number
-  contador: Contador
+  // https://stackoverflow.com/questions/66843040/what-is-the-equivalent-of-late-lazy-lateinit-in-typescript
+  // el signo de admiración: lazy - lateinit 
+  @Input() valorInicial!: number
+  contador!: Contador
 
   ngOnInit() {
     this.contador = new Contador(this.valorInicial)

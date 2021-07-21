@@ -192,9 +192,9 @@ El contador es un ejemplo es muy simple, pero muestra la independencia del scope
     Ejemplo de un componente que ingresa un n&uacute;mero entero
   </mat-card-title>
   <mat-card-content>
-    <app-contador valorInicial="3"></app-contador>
+    <app-contador [valorInicial]="3"></app-contador>
     <br>
-    <app-contador valorInicial="0"></app-contador>
+    <app-contador [valorInicial]="0"></app-contador>
   </mat-card-content>
 </mat-card>
 ```

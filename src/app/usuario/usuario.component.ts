@@ -17,7 +17,8 @@ const mapaIconos = {
 @Component({ selector: 'app-usuario', templateUrl: './usuario.component.html', styleUrls: ['./usuario.component.css'] })
 export class UsuarioComponent {
 
-  @Input() usuario: Usuario
+  // Nuevamente, lateinit
+  @Input() usuario!: Usuario
 
   get usuarioClass() {
     return mapaIconos[this.usuario.genero]
