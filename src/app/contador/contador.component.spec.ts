@@ -1,4 +1,3 @@
-import { Contador } from './contador.domain'
 import { ContadorComponent } from './contador.component'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { MatButtonModule } from '@angular/material/button'
