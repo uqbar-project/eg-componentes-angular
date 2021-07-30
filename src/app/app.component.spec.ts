@@ -10,6 +10,8 @@ import { AppComponent } from './app.component'
 import { ContadorComponent } from './contador/contador.component'
 import { UsuarioComponent } from './usuario/usuario.component'
 
+import './app.module'
+
 /** Imports de Material */
 describe('AppComponent', () => {
   beforeEach(async(() => {
