@@ -1,8 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { MatButtonModule } from '@angular/material/button'
-import { MatCardModule } from '@angular/material/card'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { UsuarioComponent } from './usuario.component'
@@ -16,10 +12,6 @@ describe('UsuarioComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UsuarioComponent],
       imports: [
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCardModule,
         BrowserAnimationsModule
       ]
     })
@@ -37,7 +29,7 @@ describe('UsuarioComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('female gender should appear with a rose icon', () => {
+  it('female gender should appear with a special icon', () => {
     const result = fixture.debugElement.nativeElement
     expect(esMujer(result)).toBeTruthy()
   })
@@ -45,5 +37,5 @@ describe('UsuarioComponent', () => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function esMujer(result: any) {
-  return result.querySelector('.mat-accent')
+  return result.querySelector('.accent')
 }

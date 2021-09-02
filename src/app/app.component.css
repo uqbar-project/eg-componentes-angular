@@ -1,0 +1,8 @@
+.example {
+  margin: 1rem;
+}
+
+.title {
+  background: linear-gradient(90deg, rgba(129,128,156,1) 0%, rgba(124,193,222,1) 0%, rgba(233,241,242,1) 100%);
+  padding: 1rem 0.5rem;
+}

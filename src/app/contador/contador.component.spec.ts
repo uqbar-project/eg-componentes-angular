@@ -1,9 +1,5 @@
 import { ContadorComponent } from './contador.component'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { MatButtonModule } from '@angular/material/button'
-import { MatCardModule } from '@angular/material/card'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { getByTestId } from '../../test-utils'
 
@@ -16,10 +12,6 @@ describe('fixture', () => {
     TestBed.configureTestingModule({
       declarations: [ContadorComponent],
       imports: [
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCardModule,
         BrowserAnimationsModule
       ]
     })

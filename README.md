@@ -173,13 +173,6 @@ import { MatInputModule } from '@angular/material/input'
   ],
 ```
 
-- y por último incorporar el tema de Material en el archivo raíz styles.css
-
-```css
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-```
-
 Esto permite que los podamos usar dentro de las vistas.
 
 # Componente contador

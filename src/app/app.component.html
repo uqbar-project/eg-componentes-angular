@@ -1,22 +1,21 @@
-<mat-card>
-  <mat-card-title primary>
+<div class="example">
+  <div class="title">
     Ejemplo de un componente que muestra un usuario
-  </mat-card-title>
-  <mat-card-content>
+  </div>
+  <div>
     <div *ngFor='let elemento of usuarios'>
       <app-usuario [usuario]="elemento"></app-usuario>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 <br>
 
-<mat-card>
-  <mat-card-title>
+<div class="example">
+  <div class="title">
     Ejemplo de un componente que ingresa un n&uacute;mero entero
-  </mat-card-title>
-  <mat-card-content>
+  </div>
+  <div>
     <app-contador [valorInicial]="3"></app-contador>
-    <br>
     <app-contador [valorInicial]="0"></app-contador>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

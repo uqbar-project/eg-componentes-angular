@@ -1,1 +1,31 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+
+html {
+  font-size: 120%;
+}
+
+* {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.color-primary {
+  background-color: rgb(82, 202, 160);
+  border: 0;
+}
+
+.circle {
+  border-radius: 2rem;
+}
+
+button {
+  padding-top: 0.2rem;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: rgb(44, 172, 123);
+}
+
+.contador__label {
+  font-size: 1em;
+}

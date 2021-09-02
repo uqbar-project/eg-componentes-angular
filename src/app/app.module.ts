@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core'
-import { MatButtonModule } from '@angular/material/button'
-import { MatCardModule } from '@angular/material/card'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
+import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
 import { ContadorComponent } from './contador/contador.component'
@@ -21,10 +17,6 @@ import { UsuarioComponent } from './usuario/usuario.component'
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
-      MatButtonModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatCardModule,
       FormsModule,
    ],
    providers: [],
