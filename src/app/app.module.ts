@@ -7,7 +7,6 @@ import { AppComponent } from './app.component'
 import { ContadorComponent } from './contador/contador.component'
 import { UsuarioComponent } from './usuario/usuario.component'
 
-/** Imports de Material */
 @NgModule({
    declarations: [
       AppComponent,

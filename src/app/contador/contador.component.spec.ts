@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { getByTestId } from '../../test-utils'
 
-/** Imports de Material */
 describe('fixture', () => {
   let component: ContadorComponent
   let fixture: ComponentFixture<ContadorComponent>
@@ -22,7 +21,6 @@ describe('fixture', () => {
     fixture = TestBed.createComponent(ContadorComponent)
     component = fixture.componentInstance
     component.valorInicial = 5
-    component.ngOnInit()
     fixture.detectChanges()
   }))
 
