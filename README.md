@@ -41,7 +41,7 @@ Otra forma de generarlo es con el plugin de Visual Studio Code:
 
 ## Vista html
 
-El primer componente reutilizable es un usuario que se visualiza en una Card de Material 
+El primer componente reutilizable es un usuario que se visualiza en un contenedor propio 
 
 - tenemos un avatar con fondos de distinto color en base al género
 - el título con el nombre completo
@@ -86,7 +86,7 @@ Algunas observaciones:
 - el usuario no vamos a instanciarlo desde cero, sino que lo vamos a pasar como **input**, por eso aparece la annotation `@Input`. Esto permite que lo llamemos desde la vista principal, dentro de un for que arma una lista de usuarios:
 
 ```html
-<div *ngFor='let elemento of usuarios'>
+<div *ngFor="let elemento of usuarios">
   <app-usuario [usuario]="elemento"></app-usuario>
 </div>
 ```
@@ -233,7 +233,7 @@ function esMujer(result: any) {
 }
 ```
 
-El método toBeTruthy() busca que exista un elemento html con una clase _mat-accent_ que equivale al color rosa de Material Angular. Claramente, los tests son más que unitarios, y están atados a los componentes visuales que estemos utilizando.
+El método toBeTruthy() busca que exista un elemento html con una clase _accent_ que equivale al color elegido para el género femenino. Es un test bastante discutible, porque es muy fácil de romper, pero didácticamente muestra que el alcance del mismo excede la unitariedad integrando componentes de presentación y de negocio.
 
 ## Contador
 
