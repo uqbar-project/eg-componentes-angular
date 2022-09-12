@@ -246,29 +246,25 @@ Además de los típicos controles de creación de componente, en los tests valid
 Esto naturalmente está en el archivo _usuario.component.spec.ts_:
 
 ```typescript
-beforeEach(waitForAsync(() => {
+beforeEach(() => {
   fixture = TestBed.createComponent(ContadorComponent)
   component = fixture.componentInstance
   component.valorInicial = 5
   fixture.detectChanges()
-}))
+})
 
-it('initial value should be 5 if setted', waitForAsync(() => {
-  fixture.whenStable().then(() => {
-    expect(getByTestId(fixture, 'contador').value).toEqual('5')
-  })
-}))
-it('initial value should increase if plus button clicked', waitForAsync(() => {
+it('initial value should be 5 if setted', () => {
+  expect(getByTestId(fixture, 'contador').value).toEqual('5')
+})
+it('initial value should increase if plus button clicked', () => {
   getByTestId(fixture, 'sumar').click()
   fixture.detectChanges()
-  fixture.whenStable().then(() => {
-    expect(getByTestId(fixture, 'contador').value).toEqual('6')
-  })
-}))
+  expect(getByTestId(fixture, 'contador').value).toEqual('6')
+})
 ...
 ```
 
-Para poder construir el objeto Contador y pasarle el valor inicial, debemos enviar el mensaje `fixture.detectChanges()` del componente. Por otra parte, el método whenStable() del fixture nos devuelve una _promise_, que cuando terminen de ejecutarse los eventos de inicialización ejecutará el bloque que le pasemos como parámetro (en este caso, verificar que el contador tiene el nuevo valor).
+Para poder construir el objeto Contador y pasarle el valor inicial, debemos enviar el mensaje `fixture.detectChanges()` del componente. 
 
 Si se fijaron bien, estamos utilizando la técnica de tener tags de HTML con atributos `data-testid`, para luego poder identificarlos puntualmente en los tests. Los navegadores ignoran esta directiva, lo que permite que nuestros tests sean resilientes a los cambios. La función `getByTestId` está definida en un archivo `test-utils`.
 
