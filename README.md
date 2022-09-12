@@ -272,6 +272,10 @@ Para poder construir el objeto Contador y pasarle el valor inicial, debemos envi
 
 Si se fijaron bien, estamos utilizando la técnica de tener tags de HTML con atributos `data-testid`, para luego poder identificarlos puntualmente en los tests. Los navegadores ignoran esta directiva, lo que permite que nuestros tests sean resilientes a los cambios. La función `getByTestId` está definida en un archivo `test-utils`.
 
+## Productos de un carrito de compras
+
+Similar al componente que muestra los usuarios, implementamos el componente que sabe mostrar un producto. La explicación completa la podés ver en [este video de Youtube](https://youtu.be/WIQvggovnY4).
+
 ## Componente padre
 
 Por último, el componente padre también tiene su propio conjunto de tests, aunque al delegar principalmente a los componentes hijos, no son pruebas interesantes para contar (simplemente que se pueda crear correctamente).
