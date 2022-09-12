@@ -1,0 +1,35 @@
+.container {
+  font-size: 12px;
+  margin: 1em;
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 6fr 2fr;
+  grid-template-areas: "imagen info precio";
+  gap: 1em;
+}
+
+.imagen {
+  justify-self: center;
+}
+
+p {
+  margin: 0.2em;
+}
+
+
+.principal {
+  font-size: 1.5em;
+}
+
+
+.secundario {
+  color: rgb(69, 67, 67);
+}
+
+
+.precio {
+  font-size: 1.3em;
+  font-weight: bold;
+} 

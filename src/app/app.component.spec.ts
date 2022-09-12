@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component'
 import { ContadorComponent } from './contador/contador.component'
+import { ProductoComponent } from './producto/producto.component'
 import { UsuarioComponent } from './usuario/usuario.component'
 
 import './app.module'
@@ -12,7 +13,10 @@ describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, UsuarioComponent, ContadorComponent
+        AppComponent, 
+        ContadorComponent,
+        ProductoComponent,
+        UsuarioComponent, 
       ],
       imports: [
         BrowserAnimationsModule,

@@ -10,3 +10,6 @@
   font-size: 1.5em;
 }
 
+button:hover {
+  background-color: rgb(44, 172, 123);
+}

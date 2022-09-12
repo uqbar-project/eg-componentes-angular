@@ -17,3 +17,13 @@
     <app-contador [valorInicial]="0"></app-contador>
   </div>
 </div>
+
+<div class="example">
+  <div class="title">
+    Productos de un carrito de compras
+  </div>
+  <div *ngFor="let producto of productos">
+    <app-producto [producto]="producto"></app-producto>
+    <hr/>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="imagen">
+    <img src="/assets/{{producto.imagen}}"/>
+  </div>
+  <div class="info">
+    <p class="principal">{{producto.descripcion}}</p>
+    <p class="secundario" data-testid="fecha-entrega">Llega el {{producto.fechaEntrega() | date:"dd/MM/yyyy"}}</p>
+  </div>
+  <div class="precio">
+    <p class="precio">{{producto.valor | currency}}</p>
+  </div>
+</div>

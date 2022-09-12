@@ -22,10 +22,11 @@ button {
   margin: 0.5rem;
 }
 
-button:hover {
-  background-color: rgb(44, 172, 123);
-}
-
 .contador__label {
   font-size: 1em;
+}
+
+img {
+  width: 4.5rem;
+  height: 2.8rem;
 }
