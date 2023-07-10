@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -36,5 +36,5 @@ jobs:
       - name: Coverage badge
         uses: demyanets/angular-coverage-badges-action@v1
         with:
-          coverage-summary-path: coverage/eg-componentes-angular/coverage-summary.json
+          coverage-summary-path: coverage/eg-conversor-angular/coverage-summary.json
           github_token: ${{ secrets.GITHUB_TOKEN }}
