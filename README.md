@@ -133,6 +133,20 @@ El contador es un ejemplo simple, pero muestra la independencia del scope de var
 </div>
 ```
 
+Fíjense que hay una diferencia entre:
+
+```html
+[valorInicial]="3"
+```
+
+donde el valor inicial que pasamos es la expresión 3 (como antes pasábamos `elemento`) vs.
+
+```html
+valorInicial="3"
+```
+
+donde el valor 3 se interpreta como un valor fijo, un String. En este caso `elemento` sería un string también, así que es importante encerrar el parámetro valorInicial entre corchetes.
+
 Por lo tanto ya sabemos que nuestro @Input debe ser un valor inicial. Pero además, vamos a trabajar con un objeto de dominio contador, al que vamos a poder sumar o restarle un número (`contador.domain.ts`):
 
 ```typescript
