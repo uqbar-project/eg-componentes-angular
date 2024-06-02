@@ -1,19 +1,15 @@
 <div class="example">
   <div class="title">
-    Ejemplo de un componente que muestra un usuario
-  </div>
-  <div *ngFor="let elemento of usuarios">
-    <app-usuario [usuario]="elemento"></app-usuario>
-  </div>
-</div>
-<br>
-
-<div class="example">
-  <div class="title">
-    Ejemplo de un componente que ingresa un n&uacute;mero entero
+    Contadores
   </div>
   <div>
-    <app-contador [valorInicial]="3"></app-contador>
+    <p>
+      El primer contador está ligado a la lista de productos
+    </p>
+    <app-contador [valorInicial]="item" [cantidad]="productos.length" (valorActual)="seleccionarProducto($event)"></app-contador>
+    <p>
+      El segundo contador es libre
+    </p>
     <app-contador [valorInicial]="0"></app-contador>
   </div>
 </div>
@@ -22,8 +18,8 @@
   <div class="title">
     Productos de un carrito de compras
   </div>
-  <div *ngFor="let producto of productos">
-    <app-producto [producto]="producto"></app-producto>
+  @for (producto of productos; track producto; let i = $index) {
+    <app-producto [producto]="producto" [productoElegido]="item - 1 === i"></app-producto>
     <hr/>
-  </div>
+  }
 </div>

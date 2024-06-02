@@ -2,28 +2,15 @@
 
 [![Build](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml) ![Coverage](./badges/eg-componentes-angular/coverage.svg)
 
-![demo](video/demo2021.gif)
-
-Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli).
-
+![demo](./images/demo2024.gif)
 
 ## Creación de componentes con Angular CLI
 
 Generamos dos componentes con la interfaz de línea de comandos de Angular
 
 ```bash
-fernando@dodain ~/workspace/angular-2018/eg-componentes-angular $ ng generate component contador
-CREATE src/app/contador/contador.component.css (0 bytes)
-CREATE src/app/contador/contador.component.html (27 bytes)
-CREATE src/app/contador/contador.component.spec.ts (642 bytes)
-CREATE src/app/contador/contador.component.ts (277 bytes)
-UPDATE src/app/app.module.ts (404 bytes)
-fernando@dodain ~/workspace/angular-2018/eg-componentes-angular $ ng generate component usuario
-CREATE src/app/usuario/usuario.component.css (0 bytes)
-CREATE src/app/usuario/usuario.component.html (26 bytes)
-CREATE src/app/usuario/usuario.component.spec.ts (635 bytes)
-CREATE src/app/usuario/usuario.component.ts (273 bytes)
-UPDATE src/app/app.module.ts (490 bytes)
+ng generate component contador # o ng g c contador
+ng generate component producto
 ```
 
 Como vemos, todo componente tiene una estructura similar a una aplicación Angular, solo que sin el módulo. Quedan entonces estos archivos:
@@ -33,94 +20,6 @@ Como vemos, todo componente tiene una estructura similar a una aplicación Angul
 - **archivo de estilos**: xxx.component.css
 - **testing unitario**: xxx.component.spec.ts
 
-Otra forma de generarlo es con el plugin de Visual Studio Code:
-
-![generate component](./images/generateComponent.png)
-
-# Componente que muestra un usuario 
-
-## Vista html
-
-El primer componente reutilizable es un usuario que se visualiza en un contenedor propio 
-
-- tenemos un avatar con fondos de distinto color en base al género
-- el título con el nombre completo
-- el subtítulo con una frase de cabecera
-
-Eso lo definimos en nuestra vista usuario.component.html:
-
-```html
-<div class="usuario__form">
-    <button class="{{usuarioColor}} usuario">
-      <i class="material-icons">person{{usuarioClass}}</i>
-    </button>
-    <div class="row">
-      <span class="title">{{usuario.nombre}}</span>
-      <span class="subtitle">{{usuario.fraseCabecera}}</span>
-    </div>
-</div>
-```
-
-## Modelo de la vista
-
-No tenemos binding bidireccional (_two-way_), sino que únicamente estaremos mostrando los datos de un usuario y nos ayudan dos propiedades usuarioClass y usuarioColor que define el modelo de la vista (ya que el objeto de dominio no debe estar atado a cuestiones tecnológicas). El archivo asociado para el modelo de la vista es usuario.component.ts:
-
-```typescript
-export class UsuarioComponent implements OnInit {
-
-  @Input() usuario! : Usuario
-
-  get usuarioClass() {
-    return mapaIconos[this.usuario.genero]
-  }
-
-  get usuarioColor() {
-    return mapaColores[this.usuario.genero]
-  }
-```
-
-Algunas observaciones:
-
-- tanto usuarioClass como usuarioColor lo definimos como properties de solo lectura mediante el prefijo get (esto hace que no lo invoquemos con paréntesis sino como si fueran atributos del objeto). En ambos métodos hacemos lo mismo: tenemos un mapa cuya clave es el género del usuari@ y cuyo valor es lo que queremos que devuelva.
-
-- el usuario no vamos a instanciarlo desde cero, sino que lo vamos a pasar como **input**, por eso aparece la annotation `@Input`. Esto permite que lo llamemos desde la vista principal, dentro de un for que arma una lista de usuarios:
-
-```html
-<div *ngFor="let elemento of usuarios">
-  <app-usuario [usuario]="elemento"></app-usuario>
-</div>
-```
-
-`[usuario]="elemento"` está marcando que pasaremos al componente el objeto de dominio usuario para cada uno de los elementos de la colección de usuarios, que debemos inicializar en el modelo del componente principal (app.component.ts):
-
-```typescript
-export class AppComponent {
-  title = 'app'
-  usuarios = [
-        new Usuario("Gabriel Graves", "Soy el Brad Pitt de Lugano", Usuario.MASCULINO),
-        new Usuario("Javier Zolotarchuk", "Tengo el corazón mirando al Sur...", Usuario.MASCULINO),
-        ...
-    ]
-}
-```
-
-## Objeto de dominio Usuario
-
-El objeto Usuario es más bien simple, agrupa y publica las propiedades. Como dato interesante podemos ver cómo se define un Enum en Typescript:
-
-```typescript
-export enum GENERO {
-    FEMENINO = 'F', MASCULINO = 'M', NO_BINARIE = 'X'
-}
-
-export class Usuario {
-    constructor(public nombre = '', public fraseCabecera = '', public genero = GENERO.NO_BINARIE) { }
-}
-```
-
-Vemos un resumen de la arquitectura:
-
-![images](images/ArquitecturaUsuario.png)
 
 # Componente contador
 
@@ -139,7 +38,7 @@ Fíjense que hay una diferencia entre:
 [valorInicial]="3"
 ```
 
-donde el valor inicial que pasamos es la expresión 3 (como antes pasábamos `elemento`) vs.
+donde el valor inicial que pasamos es la expresión 3 vs.
 
 ```html
 valorInicial="3"

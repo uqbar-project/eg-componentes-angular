@@ -1,37 +1,29 @@
-import { waitForAsync, TestBed } from '@angular/core/testing'
-import { FormsModule } from '@angular/forms'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { TestBed } from '@angular/core/testing'
 import { AppComponent } from './app.component'
-import { ContadorComponent } from './contador/contador.component'
-import { ProductoComponent } from './producto/producto.component'
-import { UsuarioComponent } from './usuario/usuario.component'
-
-import './app.module'
 
 describe('AppComponent', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent, 
-        ContadorComponent,
-        ProductoComponent,
-        UsuarioComponent, 
-      ],
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule
-      ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppComponent],
     }).compileComponents()
-  }))
-  it('should create the app', waitForAsync(() => {
+  })
+
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.debugElement.componentInstance
+    const app = fixture.componentInstance
     expect(app).toBeTruthy()
-  }))
-  it(`should have as title 'app'`, waitForAsync(() => {
+  })
+
+  it(`should have the 'eg-componentes-angular' title`, () => {
     const fixture = TestBed.createComponent(AppComponent)
-    const app = fixture.debugElement.componentInstance
-    expect(app.title).toEqual('app')
-  }))
+    const app = fixture.componentInstance
+    expect(app.title).toEqual('eg-componentes-angular')
+  })
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent)
+    fixture.detectChanges()
+    const compiled = fixture.nativeElement as HTMLElement
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, eg-componentes-angular')
+  })
 })
