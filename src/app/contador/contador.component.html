@@ -1,9 +1,9 @@
 <div class="contador__form">
-    <button class="circle color-primary" data-testid="restar" (click)="contador.restar()">
+    <button class="circle color-primary" data-testid="restar" (click)="restar()">
         <i class="material-icons">keyboard_arrow_left</i>
     </button>
     <input class="contador__label" data-testid="contador" disabled value={{contador.valor}}/>
-    <button class="circle color-primary" data-testid="sumar" (click)="contador.sumar()">
+    <button class="circle color-primary" data-testid="sumar" (click)="sumar()">
         <i class="material-icons">keyboard_arrow_right</i>
     </button>
 </div>

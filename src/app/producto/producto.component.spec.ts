@@ -1,8 +1,8 @@
-import { getByTestId } from './../../test-utils'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { Producto } from './producto.domain'
 import { ProductoComponent } from './producto.component'
+import { getByTestId } from '../test-utils'
+import { Producto } from './producto.domain'
 
 describe('ProductoComponent', () => {
   let component: ProductoComponent
@@ -13,11 +13,10 @@ describe('ProductoComponent', () => {
     jasmine.clock().install()
     jasmine.clock().mockDate(new Date(new Date(2014, 1, 26)))
     //
-    
+
     await TestBed.configureTestingModule({
-      declarations: [ ProductoComponent ]
-    })
-    .compileComponents()
+      imports: [ProductoComponent]
+    }).compileComponents()
 
     fixture = TestBed.createComponent(ProductoComponent)
     component = fixture.componentInstance
@@ -32,7 +31,16 @@ describe('ProductoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
   it('should delegate delivery date to product object', () => {
-    expect(getByTestId(fixture, 'fecha-entrega').innerHTML).toBe('Llega el 02/03/2014')
+    expect(getByTestId(fixture, 'fecha-entrega').innerHTML).toBe(
+      'Llega el 02/03/2014'
+    )
+  })
+
+  it('should show selected product', () => {
+    component.productoElegido = true
+    fixture.detectChanges()
+    expect(getByTestId(fixture, 'row').getAttribute('class')).toContain('elegido')
   })
 })
