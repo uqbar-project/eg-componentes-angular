@@ -13,21 +13,20 @@ ng generate component contador # o ng g c contador
 ng generate component producto
 ```
 
-Como vemos, todo componente tiene una estructura similar a una aplicación Angular, solo que sin el módulo. Quedan entonces estos archivos:
+## Componente contador
 
-- **vista**: archivo xxx.component.html
-- **modelo de vista**: xxx.component.ts
-- **archivo de estilos**: xxx.component.css
-- **testing unitario**: xxx.component.spec.ts
+### Llamando al contador desde app
 
+El contador es un ejemplo simple, pero muestra 
 
-# Componente contador
+- por un lado, la independencia del scope de variables de los componentes de Angular
+- cómo nos llega y cómo enviamos información desde el componente
 
-El contador es un ejemplo simple, pero muestra la independencia del scope de variables de los componentes de Angular. En la vista principal de la aplicación, definimos dos contadores, cada uno con diferente valor inicial. En el archivo app.component.html escribimos:
+En la vista principal de la aplicación, definimos dos contadores, cada uno con diferente valor inicial. En el archivo app.component.html escribimos:
 
 ```html
 <div>
-  <app-contador [valorInicial]="3"></app-contador>
+  <app-contador [valorInicial]="item" [cantidad]="productos.length" ...>
   <app-contador [valorInicial]="0"></app-contador>
 </div>
 ```
@@ -35,34 +34,31 @@ El contador es un ejemplo simple, pero muestra la independencia del scope de var
 Fíjense que hay una diferencia entre:
 
 ```html
-[valorInicial]="3"
+[valorInicial]="0"
 ```
 
 donde el valor inicial que pasamos es la expresión 3 vs.
 
 ```html
-valorInicial="3"
+valorInicial="0"
 ```
 
-donde el valor 3 se interpreta como un valor fijo, un String. En este caso `elemento` sería un string también, así que es importante encerrar el parámetro valorInicial entre corchetes.
+donde 0 se interpreta como un valor fijo, un String. Para poder enviar expresiones como parámetro es importante encerrar el parámetro `valorInicial` entre corchetes.
 
-Por lo tanto ya sabemos que nuestro @Input debe ser un valor inicial. Pero además, vamos a trabajar con un objeto de dominio contador, al que vamos a poder sumar o restarle un número (`contador.domain.ts`):
+En el componente vamos a recibir como @Input 
+- el valor inicial
+- opcionalmente, una cantidad
 
-```typescript
+Pero además, vamos a trabajar con un objeto de dominio contador, al que vamos a poder sumar o restarle un número (`contador.domain.ts`). En el caso de recibir una cantidad, lo que vamos a hacer es movernos de 1 a la cantidad de elementos: por ejemplo, si tenemos la cantidad 4 y el valor inicial 2, podemos subir de 2 a 3, de 3 a 4 y luego de 4 iremos a 1. De la misma manera al restar un valor, vamos de 2 a 1, de 1 a 4 y así sucesivamente. Si no ingresamos cantidad el contador sube o baja siempre un número.
+
+> El contador como objeto de dominio tiene sus propios tests unitarios, que no dependen de la tecnología que utilicemos.
+
+En el constructor definimos parámetros con el modificador `public` o `private` para generar un atributo en la misma clase:
+
+```ts
 export class Contador {
-    constructor(public valor = 0) { }
-
-    sumar() {
-        this.valor++
-    }
-
-    restar() {
-        this.valor--
-    }
-}
+  constructor(public valor = 0, public cantidad = 0) { }
 ```
-
-Los parámetros en el constructor marcados con el modificador `public` o `private` generan un atributo en la misma clase:
 
 - primero definimos un atributo valor de tipo number, con valor por defecto 0
 - por otra parte al construir un Contador, asignamos el valor recibido en el constructor en dicho atributo
@@ -70,26 +66,27 @@ Los parámetros en el constructor marcados con el modificador `public` o `privat
 Entonces:
 
 ```ts
-new Contador()   ==> el atributo valor se inicializa en 0
-new Contador(5)  ==> el atributo valor se inicializa en 5
+new Contador()      // ==> el atributo valor se inicializa en 0, y la cantidad en 0
+new Contador(5)     // ==> el atributo valor se inicializa en 5, y la cantidad en 0
+new Contador(5, 7)  // ==> el atributo valor se inicializa en 5, y la cantidad en 7
 ```
 
 Para más información pueden ver [este artículo](https://kendaleiv.com/typescript-constructor-assignment-public-and-private-keywords/).
 
-## Componente Contador
+### Modelo de la vista Contador
 
-El componente Contador va a inicializar el contador cuando reciba el valor inicial. Y esto lo hace en el momento de la inicialización, dentro del método ngOnInit (contador.component.ts):
+```ts
+export class ContadorComponent {
+  @Input() valorInicial!: number
+  @Input() cantidad: number = 0
 
-```typescript
-export class ContadorComponent implements OnInit {
+  ...
 
-  @Input() valorInicial : number
-  contador! : Contador
-  
+  contador!: Contador
+
   ngOnInit() {
-    this.contador = new Contador(this.valorInicial)
+    this.contador = new Contador(this.valorInicial, this.cantidad)
   }
-}
 ```
 
 ¿Qué significa el signo de admiración (`!`) para la referencia contador? Que Typescript puede asumir que la variable siempre tendrá un valor Contador (no puede ser nula), en caso contrario cuando accedamos a dicha variable en runtime y sea nula recibiremos un mensaje de error (para más información recomendamos leer [este artículo](https://stackoverflow.com/questions/66843040/what-is-the-equivalent-of-late-lazy-lateinit-in-typescript)).
@@ -103,52 +100,69 @@ Esto lo vemos en la vista contador.component.html:
 
 ```html
 <div class="contador__form">
-    <button class="circle color-primary" data-testid="restar" (click)="contador.restar()">
+    <button class="circle color-primary" data-testid="restar" (click)="restar()">
         <i class="material-icons">keyboard_arrow_left</i>
     </button>
     <input class="contador__label" data-testid="contador" disabled value={{contador.valor}}/>
-    <button class="circle color-primary" data-testid="sumar" (click)="contador.sumar()">
+    <button class="circle color-primary" data-testid="sumar" (click)="sumar()">
         <i class="material-icons">keyboard_arrow_right</i>
     </button>
 </div>
 ```
 
-Lo interesante es que pueden coexistir dos componentes app-contador, cada una con su propio valor en el modelo.
+Algunas observaciones:
 
-Vemos el gráfico general de la solución en Angular:
+1. pueden coexistir dos componentes app-contador, cada una con su propio valor en el modelo
+2. ¿por qué existe un método restar() y otro sumar() en el modelo de la vista? Porque queremos avisar a nuestro componente llamador (al padre) que cambiamos de estado. Eso nos va a permitir en nuestro caso seleccionar el siguiente producto de la lista.
 
-![images](images/ArquitecturaContador.png)
+### Evento de actualización al subir o bajar
 
-# Componente principal
+Veamos cómo se implementa el método sumar() del componente contador:
 
-Como hemos visto anteriormente el componente principal pasa
-
-- cada parámetro de la lista de usuarios como input del componente de usuarios
-- un valor inicial como input al componente contador
-
-![images](images/ArquitecturaComponentesReutilizables.png)
-
-# Testing
-
-## Usuario
-
-Hay un solo test relevante para contar respecto al usuario: el componente debe mostrar un ícono de color diferente en el caso del género femenino:
-
-```typescript
-it('female gender should appear with a special icon', () => {
-  const result = fixture.debugElement.nativeElement
-  expect(esMujer(result)).toBeTruthy()
-})
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function esMujer(result: any) {
-  return result.querySelector('.accent')
+```ts
+sumar() {
+  this.contador.sumar()
+  this.valorActual.emit(this.contador.valor)
 }
 ```
 
-El método toBeTruthy() busca que exista un elemento html con una clase _accent_ que equivale al color elegido para el género femenino. Es un test bastante discutible, porque es muy fácil de romper, pero didácticamente muestra que el alcance del mismo excede la unitariedad integrando componentes de presentación y de negocio.
+1. delegamos al contador la actualización interna del contador
+2. por otra parte emitimos un evento de actualización, pasando el nuevo valor del contador. `valorActual` se definió como @Output en el mismo componente:
 
-## Contador
+```ts
+export class ContadorComponent {
+  ...
+
+  @Output() valorActual = new EventEmitter<number>()
+```
+
+Lo que debemos respetar es el tipo del valor _generic_ que espera el EventEmitter. Como el valor del contador es un número, tenemos que tiparlo como `EventEmitter<number>`.
+
+Luego, en el componente App vamos a definir un método que escuche el evento y lo almacene dentro del estado del modelo de la vista de AppComponent:
+
+```html
+<app-contador [valorInicial]="item" [cantidad]="productos.length" (valorActual)="seleccionarProducto($event)"></app-contador>
+```
+
+El nombre `(valorActual)` debe coincidir con el `@Output` que definió el componente hijo, y el nombre del método que escucha el evento debe coincidir con este método que recibe como parámetro el nuevo valor. Sin embargo, en la vista nosotros escribimos `$event` que luego es traducido a un parámetro de tipo number dentro del AppComponent:
+
+```ts
+seleccionarProducto(nuevoItem: number) {
+  this.item = nuevoItem
+}
+```
+
+Vemos el gráfico general de la solución en Angular:
+
+![images](images/ArquitecturaContador.png) TODO: actualizarlo
+
+## Componente producto
+
+TODO
+
+## Testing
+
+### Contador
 
 Además de los típicos controles de creación de componente, en los tests validamos
 
