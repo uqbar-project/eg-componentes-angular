@@ -1,6 +1,6 @@
 # Componentes reutilizables de Angular
 
-[![Build](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml) ![Coverage](./badges/eg-componentes-angular/coverage.svg)
+[![Build](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-componentes-angular/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/uqbar-project/eg-componentes-angular/graph/badge.svg?token=XJbCaAClVx)](https://codecov.io/gh/uqbar-project/eg-componentes-angular)
 
 ![demo](./images/demo2024.gif)
 
