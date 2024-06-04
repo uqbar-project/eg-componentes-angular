@@ -154,7 +154,7 @@ seleccionarProducto(nuevoItem: number) {
 
 Vemos el gráfico general de la solución en Angular:
 
-![images](images/ArquitecturaContador.png) TODO: actualizarlo
+![images](./images/eventos.png)
 
 ## Componente producto
 
