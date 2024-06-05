@@ -158,46 +158,61 @@ Vemos el gráfico general de la solución en Angular:
 
 ## Componente producto
 
-TODO
+El componente principal (app) genera un _loop for_ para mostrar todos los productos:
+
+```html
+@for (producto of productos; track producto; let i = $index) {
+  <app-producto [producto]="producto" [productoElegido]="item - 1 === i"></app-producto>
+  <hr/>
+}
+```
+
+El componente producto recibe como inputs
+- cada uno de los productos
+- y nos dice si es el producto seleccionado: esto se da por el evento que emite el componente hermano **Contador**, que a su vez hace que el padre asigne en la variable item un número que representa el índice de la lista. Recordemos que en typescript trabajamos de 0 a _n - 1_, entonces tenemos que ajustar el ítem elegido con la posición que ocupa en la lista (siempre un número menos)
+
+Ya dentro del componente producto, no necesitamos más que mostrar la información de cada producto. Las imágenes las sacamos del directorio `assets`, podríamos utilizar paths externos pero sirve como ejemplo didáctico.
 
 ## Testing
 
 ### Contador
 
-Además de los típicos controles de creación de componente, en los tests validamos
+Además de los mencionados tests unitarios para el contador, en los tests de la vista validamos
 
 - que se pueda pasar un valor inicial como parámetro @input: se debe visualizar en el input de texto
 - pasar un valor e incrementar uno el contador: se debe visualizar el nuevo valor en el input
+- pasar un valor y la cantidad e incrementar sucesivamente el contador hasta volver su valor a 1
 - pasar un valor y decrementar uno el contador: se debe visualizar el nuevo valor en el input
+- pasar un valor y la cantidad y decrementar sucesivamente el contador hasta que el valor del contador sea la cantidad
 
-Esto naturalmente está en el archivo _usuario.component.spec.ts_:
+Esto naturalmente está en el archivo _usuario.component.spec.ts_, veamos un ejemplo:
 
 ```typescript
-beforeEach(() => {
-  fixture = TestBed.createComponent(ContadorComponent)
-  component = fixture.componentInstance
-  component.valorInicial = 5
-  fixture.detectChanges()
-})
+describe('counter - limit', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ContadorComponent)
+    component = fixture.componentInstance
+    component.valorInicial = 2
+    component.cantidad = 4
+    fixture.detectChanges()
+  })
 
-it('initial value should be 5 if setted', () => {
-  expect(getByTestId(fixture, 'contador').value).toEqual('5')
-})
-it('initial value should increase if plus button clicked', () => {
-  getByTestId(fixture, 'sumar').click()
-  fixture.detectChanges()
-  expect(getByTestId(fixture, 'contador').value).toEqual('6')
-})
-...
+  it('initial value should increase if plus button clicked, up to limit', () => {
+    getByTestId(fixture, 'sumar').click()
+    fixture.detectChanges()
+    expect(getByTestId(fixture, 'contador').value).toEqual('3')
+    getByTestId(fixture, 'sumar').click()
+    getByTestId(fixture, 'sumar').click()
+    fixture.detectChanges()
+    expect(getByTestId(fixture, 'contador').value).toEqual('1')
+  })
 ```
 
-Para poder construir el objeto Contador y pasarle el valor inicial, debemos enviar el mensaje `fixture.detectChanges()` del componente. 
+Para poder construir el objeto Contador y pasarle el valor inicial, debemos enviar el mensaje `fixture.detectChanges()` del componente. Por eso ésto lo hacemos en el beforeEach del test.
 
-Si se fijaron bien, estamos utilizando la técnica de tener tags de HTML con atributos `data-testid`, para luego poder identificarlos puntualmente en los tests. Los navegadores ignoran esta directiva, lo que permite que nuestros tests sean resilientes a los cambios. La función `getByTestId` está definida en un archivo `test-utils`.
+Si se fijaron bien, estamos utilizando la técnica de tener tags de HTML con atributos `data-testid`, para luego poder identificarlos puntualmente en los tests. Los navegadores ignoran esta directiva, lo que permite que nuestros tests sean resilientes a los cambios. La función `getByTestId` está definida en un archivo auxiliar llamado  `test-utils`.
 
-## Productos de un carrito de compras
-
-Similar al componente que muestra los usuarios, implementamos el componente que sabe mostrar un producto. La explicación completa la podés ver en [este video de Youtube](https://youtu.be/WIQvggovnY4).
+La explicación completa la podés ver en [este video de Youtube](https://youtu.be/WIQvggovnY4).
 
 ## Componente padre
 
