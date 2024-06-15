@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ProductoComponent } from './producto.component'
-import { getByTestId } from '../test-utils'
+import { getByTestId } from 'app/test-utils'
 import { Producto } from './producto.domain'
 
 describe('ProductoComponent', () => {

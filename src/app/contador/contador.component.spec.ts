@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ContadorComponent } from './contador.component'
-import { getByTestId } from '../test-utils'
+import { getByTestId } from 'app/test-utils'
 
 describe('ContadorComponent', () => {
   let component: ContadorComponent
