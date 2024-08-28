@@ -185,7 +185,7 @@ Además de los mencionados tests unitarios para el contador, en los tests de la 
 - pasar un valor y decrementar uno el contador: se debe visualizar el nuevo valor en el input
 - pasar un valor y la cantidad y decrementar sucesivamente el contador hasta que el valor del contador sea la cantidad
 
-Esto naturalmente está en el archivo _usuario.component.spec.ts_, veamos un ejemplo:
+Esto naturalmente está en el archivo _contador.component.spec.ts_, veamos un ejemplo:
 
 ```typescript
 describe('counter - limit', () => {
